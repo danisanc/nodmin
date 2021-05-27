@@ -3,7 +3,7 @@ import ExpressAdapter from './default/express.adapter';
 
 import * as Types from './types';
 import * as Interfaces from './interfaces';
-import * as CrudFunctions from './utils/crud';
+import CreateCrud from './utils/crud';
 
 export class Nodmin implements Interfaces.NodminInterface {
   private properties: Types.Properties;
@@ -19,7 +19,7 @@ export class Nodmin implements Interfaces.NodminInterface {
   }
 
   private buildCrudFromResources() {
-    return CrudFunctions.createCrud(
+    return CreateCrud(
       this.properties.resources,
       this.server,
       this.orm,
@@ -47,6 +47,7 @@ const dashboard = new Nodmin({
     },
   ],
 });
+
 dashboard.build();
 
 export default Nodmin;
