@@ -1,25 +1,36 @@
-function createViewRoutes(resource, server, orm) {
-  console.log(resource, server, orm);
+import * as Interfaces from '../interfaces';
 
-  // /photo - index
-  // /photo/create - create
-  // /photo/{photo} - show
-  // /photo/{photo}/edit - edit
+export default class CRUD {
+  private server: Interfaces.ServerAdapter;
+
+  private orm: Interfaces.ORMAdapter;
+
+  constructor(server: Interfaces.ServerAdapter, orm: Interfaces.ORMAdapter) {
+    this.server = server;
+    this.orm = orm;
+  }
+
+  private createViewRoutes(resource) {
+    console.log(resource, this.server, this.orm);
+
+    // /photo - index
+    // /photo/create - create
+    // /photo/{photo} - show
+    // /photo/{photo}/edit - edit
+  }
+
+  private createServerRoutes(resource) {
+    console.log(resource, this.server, this.orm);
+
+    // /photo - store
+    // /photo - update
+    // /photo - destroy
+  }
+
+  public create(resources) {
+    resources.forEach((element) => {
+      this.createViewRoutes(element);
+      this.createServerRoutes(element);
+    });
+  }
 }
-
-function createServerRoutes(resource, server, orm) {
-  console.log(resource, server, orm);
-
-  // /photo - store
-  // /photo - update
-  // /photo - destroy
-}
-
-function createCrud(resources, server, orm) {
-  resources.forEach((element) => {
-    createViewRoutes(element, server, orm);
-    createServerRoutes(element, server, orm);
-  });
-}
-
-export default createCrud;
