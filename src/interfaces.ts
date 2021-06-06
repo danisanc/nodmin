@@ -1,19 +1,17 @@
-export interface NodminInterface {
-  build(): void
-}
+import { Router, RequestHandler } from "express";
 
 export interface ServerAdapter {
-  render(): void
-  get(): void
-  post(): void
-  put(): void
-  delete(): void
+  router: Router;
+  middleware(handler: RequestHandler): void;
+  get(path: string, handler: RequestHandler): void;
+  get(path: string, handler: RequestHandler): void;
+  put(path: string, handler: RequestHandler): void;
+  delete(path: string, handler: RequestHandler): void;
 }
 
 export interface ORMAdapter {
-  findOne(model, param, value): any
-  findAll(model): any
-  create(model, body): any
-  update(model, param, value, body): any
-  delete(model, param, value): any
+  find(): void;
+  list(): void;
+  update(): void;
+  delete(): void;
 }

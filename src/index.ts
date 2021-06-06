@@ -1,1 +1,1 @@
-export * from './nodmin';
+export * from "./nodmin";

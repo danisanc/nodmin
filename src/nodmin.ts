@@ -1,51 +1,69 @@
-import MongooseAdapter from './default/mongoose.adapter';
-import ExpressAdapter from './default/express.adapter';
+import * as Interfaces from "./interfaces";
+import * as Types from "./types";
 
-import * as Types from './types';
-import * as Interfaces from './interfaces';
+// import * as CrudHelper from "./helpers/crud.helper";
+import * as AdminHelper from "./helpers/admin.helper";
 
-import CRUD from './utils/crud';
+import ExpressAdapter from "./adapters/express.adapter";
+import MongooseAdapter from "./adapters/mongoose.adapter";
 
-export class Nodmin implements Interfaces.NodminInterface {
-  private properties: Types.Properties;
+class Nodmin {
+  // Vars
+  private options: Types.NodminOptions;
 
-  private server: Interfaces.ServerAdapter;
+  // Adapters
+  private Server: Interfaces.ServerAdapter;
+  private ORM: Interfaces.ORMAdapter;
 
-  private orm: Interfaces.ORMAdapter;
+  /**
+   * Received options and configure nodmin
+   *
+   * @param options
+   */
+  constructor(options: Types.NodminOptions) {
+    this.options = options;
 
-  constructor(properties: Types.Properties) {
-    this.properties = properties;
-    this.server = new ExpressAdapter();
-    this.orm = new MongooseAdapter();
+    this.Server = new ExpressAdapter();
+    this.ORM = new MongooseAdapter();
   }
 
-  private buildCrudFromResources() {
-    const crud = new CRUD(this.server, this.orm);
-    return crud.create(this.properties.resources);
+  /**
+   * Prepare base data to navbar, paths and etc...
+   *
+   * @returns data
+   */
+  private prepareData(): Types.BaseData {
+    return AdminHelper.prepareData(this.options);
   }
 
-  public build() {
-    // const crudProperties = this.buildCrudFromResources();
-    this.buildCrudFromResources();
+  /**
+   * @returns
+   */
+  private makeBaseRoutes(data: Types.BaseData): Types.BaseData {
+    return data;
+  }
 
-    // 2. create crud for every resource
-    // 1. create navigation for every resource
-    // 3. mount dashboard with navigation and crud routes
-    // 4. return mounted router
+  /**
+   * @returns
+   */
+  private makeCrudRoutes(data: Types.BaseData): Types.BaseData {
+    return data;
+  }
+
+  /**
+   * @returns
+   */
+  public build(): any {
+    const data = this.prepareData();
+    this.makeBaseRoutes(data);
+    this.makeCrudRoutes(data);
+
+    this.Server.get("/teste", (req, res) => {
+      res.send("Rota de teste");
+    });
+
+    return this.Server.router;
   }
 }
-
-const dashboard = new Nodmin({
-  resources: [
-    {
-      model: 'teste',
-    },
-    {
-      model: 'teste 2',
-    },
-  ],
-});
-
-dashboard.build();
 
 export default Nodmin;
