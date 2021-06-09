@@ -1,4 +1,4 @@
-import { Router, RequestHandler } from "express";
+import { Router, RequestHandler } from 'express';
 
 export interface ServerAdapter {
   router: Router;

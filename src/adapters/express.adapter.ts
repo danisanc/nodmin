@@ -1,6 +1,6 @@
-import { Router, RequestHandler } from "express";
+import { Router, RequestHandler } from 'express';
 
-import * as Interfaces from "../interfaces";
+import * as Interfaces from '../interfaces';
 
 class ExpressAdapter implements Interfaces.ServerAdapter {
   public router: Router;

@@ -1,5 +1,5 @@
-import * as Interfaces from "../interfaces";
-import * as Types from "../types";
+import * as Interfaces from '../interfaces';
+import * as Types from '../types';
 
 class MongooseAdapter implements Interfaces.ORMAdapter {
   public find(): null {

@@ -1,1 +1,3 @@
-export * from "./nodmin";
+export * from './types';
+export * from './interfaces';
+export default './nodmin';

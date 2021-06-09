@@ -1,11 +1,11 @@
-import * as Interfaces from "./interfaces";
-import * as Types from "./types";
+import * as Interfaces from './interfaces';
+import * as Types from './types';
 
 // import * as CrudHelper from "./helpers/crud.helper";
-import * as AdminHelper from "./helpers/admin.helper";
+import * as AdminHelper from './helpers/admin.helper';
 
-import ExpressAdapter from "./adapters/express.adapter";
-import MongooseAdapter from "./adapters/mongoose.adapter";
+import ExpressAdapter from './adapters/express.adapter';
+import MongooseAdapter from './adapters/mongoose.adapter';
 
 class Nodmin {
   // Vars
@@ -58,8 +58,9 @@ class Nodmin {
     this.makeBaseRoutes(data);
     this.makeCrudRoutes(data);
 
-    this.Server.get("/teste", (req, res) => {
-      res.send("Rota de teste");
+    this.Server.get('/teste', (req, res) => {
+      console.log(data);
+      res.send('Rota de teste');
     });
 
     return this.Server.router;
