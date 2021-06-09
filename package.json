@@ -13,8 +13,6 @@
     "prettier:format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
     "@types/express": "^4.17.12",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^15.12.1",
